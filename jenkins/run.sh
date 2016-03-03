@@ -1,4 +1,5 @@
 #!/bin/bash
+docker stop mechanized_martius
 docker rm mechanized_martius
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
               -v $(which docker):/usr/bin/docker \
