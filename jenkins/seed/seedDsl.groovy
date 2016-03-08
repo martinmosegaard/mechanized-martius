@@ -32,6 +32,10 @@ job('commit') {
 job('test') {
   description('Acceptance test')
 
+  triggers {
+    upstream('commit')
+  }
+
   steps {
     shell('''\
     #!/bin/bash -x
@@ -50,6 +54,23 @@ job('test') {
     	echo "Availability too low"
     	exit 1
     fi
+    '''.stripIndent())
+  }
+}
+
+job('release') {
+
+  description('Release the artifacts')
+
+  triggers {
+    upstream('test')
+  }
+
+  steps {
+    shell('''\
+    #!/bin/bash -x
+
+    sudo docker tag testing-app:snapshot testing-app:stable
     '''.stripIndent())
   }
 }
