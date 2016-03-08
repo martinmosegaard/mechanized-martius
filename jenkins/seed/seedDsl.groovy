@@ -1,7 +1,5 @@
-/**
- */
-
 job('commit') {
+  description('Build and smoke test')
 
   scm {
     github('martinmosegaard/mechanized-martius')
@@ -12,12 +10,13 @@ job('commit') {
     #!/bin/bash -x
     sudo docker rm -f testing-app
 
+    # Build and run a the web server in Docker
     cd docker
     sudo docker build -t testing-app:snapshot .
     sudo docker run -d --name testing-app testing-app:snapshot
     cip=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' testing-app)
 
-    # Unit test result
+    # Smoke test: Is the web server reachable?
     sudo docker run --rm rufus/siege-engine -g http://${cip}:80/
     if [ $? -ne 0 ]
     then
@@ -31,6 +30,8 @@ job('commit') {
 }
 
 job('test') {
+  description('Acceptance test')
+
   steps {
     shell('''\
     #!/bin/bash -x
