@@ -2,6 +2,11 @@
  */
 
 job('commit') {
+
+  scm {
+    github('martinmosegaard/mechanized-martiues')
+  }
+
   steps {
     shell('''\
     #!/bin/bash -x
