@@ -1,6 +1,6 @@
 #!/bin/bash
 docker stop mm_jenkins
-docker rm mm_jenkins
+docker rm -v mm_jenkins
 # Docker outside of Docker
 # http://container-solutions.com/running-docker-in-jenkins-in-docker/
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock \

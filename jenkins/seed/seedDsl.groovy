@@ -4,7 +4,7 @@
 job('commit') {
 
   scm {
-    github('martinmosegaard/mechanized-martiues')
+    github('martinmosegaard/mechanized-martius')
   }
 
   steps {
