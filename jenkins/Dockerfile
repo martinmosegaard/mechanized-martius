@@ -17,7 +17,4 @@ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
 # Prepare for creation of seed job:
 # The job is created by running a custom script in /usr/share/jenkins/init.groovy.d
-# It uses an XML file to define the seed job.
-COPY seed/config.xml /usr/share/jenkins/seedJobConfig.xml
-COPY seed/seedDsl.groovy /usr/share/jenkins/seedDsl.groovy
 COPY seed/createSeedJob.groovy /usr/share/jenkins/ref/init.groovy.d/
