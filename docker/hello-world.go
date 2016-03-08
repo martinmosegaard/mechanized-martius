@@ -6,8 +6,8 @@ import (
 )
 
 func homeHandler() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World!")
+	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		fmt.Fprintf(writer, "Hello World!")
 	})
 }
 
