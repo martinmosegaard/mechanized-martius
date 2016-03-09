@@ -31,6 +31,8 @@ Then go to Jenkins in a browser and proceed to:
 
 * Run the seed job
 * Run the commit job
+* Wait for release job to succeed, then run `docker images` to verify you have an image
+  called `testing-app:stable`
 * Celebrate
 
 
