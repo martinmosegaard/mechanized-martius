@@ -74,3 +74,14 @@ job('release') {
     '''.stripIndent())
   }
 }
+
+buildPipelineView('Pipeline') {
+  title('shamu-app pipeline')
+  displayedBuilds(50)
+  selectedJob('commit')
+  alwaysAllowManualTrigger()
+  showPipelineParametersInHeaders()
+  showPipelineParameters()
+  showPipelineDefinitionHeader()
+  refreshFrequency(60)
+}
