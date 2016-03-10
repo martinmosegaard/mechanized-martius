@@ -8,16 +8,16 @@ job('commit') {
   steps {
     shell('''\
     #!/bin/bash -x
-    sudo docker rm -f testing-app
+    sudo docker rm -f shamu-app
 
     # Build and run a the web server in Docker
     cd docker
-    sudo docker build -t testing-app:snapshot .
-    sudo docker run -d --name testing-app testing-app:snapshot
-    cip=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' testing-app)
+    sudo docker build -t praqma/shamu-app:snapshot .
+    sudo docker run -d --name shamu-app praqma/shamu-app:snapshot
+    shamuAppIp=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' shamu-app)
 
     # Smoke test: Is the web server reachable?
-    sudo docker run --rm rufus/siege-engine -g http://${cip}:80/
+    sudo docker run --rm rufus/siege-engine -g http://${shamuAppIp}:80/
     if [ $? -ne 0 ]
     then
       echo Unit test failed
@@ -41,8 +41,8 @@ job('test') {
     #!/bin/bash -x
 
     # Acceptance test: Stress test for 10 seconds
-    cip=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' testing-app)
-    sudo docker run --rm rufus/siege-engine -t 10s http://${cip}:80/ > output 2>&1
+    shamuAppIp=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' shamu-app)
+    sudo docker run --rm rufus/siege-engine -t 10s http://${shamuAppIp}:80/ > output 2>&1
 
     # Acceptance test result test: Was availability 100%?
     avail=$(cat output | grep Availability)
@@ -70,7 +70,7 @@ job('release') {
     shell('''\
     #!/bin/bash -x
 
-    sudo docker tag testing-app:snapshot testing-app:stable
+    sudo docker tag praqma/shamu-app:snapshot praqma/shamu-app:stable
     '''.stripIndent())
   }
 }
