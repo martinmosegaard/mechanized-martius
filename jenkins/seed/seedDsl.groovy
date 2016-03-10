@@ -10,8 +10,8 @@ job('commit') {
     #!/bin/bash -x
     sudo docker rm -f shamu-app
 
-    # Build and run a the web server in Docker
-    cd docker
+    # Build and run the web server in Docker
+    cd shamu-app
     sudo docker build -t praqma/shamu-app:snapshot .
     sudo docker run -d --name shamu-app praqma/shamu-app:snapshot
     shamuAppIp=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' shamu-app)
