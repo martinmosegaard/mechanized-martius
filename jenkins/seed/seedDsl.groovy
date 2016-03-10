@@ -27,14 +27,14 @@ job('commit') {
     fi
     '''.stripIndent())
   }
+
+  publishers {
+    downstream('test')
+  }
 }
 
 job('test') {
   description('Acceptance test')
-
-  triggers {
-    upstream('commit')
-  }
 
   steps {
     shell('''\
@@ -56,15 +56,14 @@ job('test') {
     fi
     '''.stripIndent())
   }
+
+  publishers {
+    downstream('release')
+  }
 }
 
 job('release') {
-
   description('Release the artifacts')
-
-  triggers {
-    upstream('test')
-  }
 
   steps {
     shell('''\
