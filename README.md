@@ -38,6 +38,5 @@ Then go to Jenkins in a browser and proceed to:
 
 ## TODO
 * Clean up createJobDsl imports and code
-* Job DSL pipeline view, list view
 * Release job: push to a Docker registry
 * Test job: publishers / plotBuildData using groovy-parsed output.csv file
