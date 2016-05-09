@@ -1,4 +1,4 @@
-FROM jenkins:1.642.2
+FROM jenkins:2.0
 MAINTAINER Martin Mosegaard Amdisen <martin.amdisen@praqma.com>
 
 # Docker outside of Docker
