@@ -1,11 +1,10 @@
-FROM jenkins:2.0
+FROM jenkins:2.0-alpine
 MAINTAINER Martin Mosegaard Amdisen <martin.amdisen@praqma.com>
 
 # Docker outside of Docker
 # http://container-solutions.com/running-docker-in-jenkins-in-docker/
 USER root
-RUN apt-get update && \
-    apt-get install -y sudo && \
+RUN apk add --update sudo && \
     rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
