@@ -1,4 +1,4 @@
-FROM jenkins:2.0-alpine
+FROM jenkins:2.3-alpine
 MAINTAINER Martin Mosegaard Amdisen <martin.amdisen@praqma.com>
 
 # Docker outside of Docker
